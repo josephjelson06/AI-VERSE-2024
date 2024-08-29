@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- {% load static %} -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="css/payment.css"> -->
+    <link rel="stylesheet" href="../../static/css/payment.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Poppins:wght@100;200;400&display=swap"
+      rel="stylesheet"
+    />
+    <title>AIVerse 1.0 | Payment Submission</title>
+
+    <!-- <link rel="icon" type="images/x-icon" href="{% static 'Static_images\AIverse_logo.png' %}" /> -->
+    <link
+      rel="icon"
+      type="images/x-icon"
+      href="../../static/Static_images/ailogo.png"
+    />
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+
+    <script>
+      function enableSubmit() {
+        const uploadInput = document.getElementById("screenshot");
+        const submitButton = document.getElementById("submitBtn");
+        submitButton.addEventListener("click", function () {
+          // Check the current text of the button
+          if (submitButton.innerText === "submit") {
+            // Change the text to something else
+            submitButton.innerText = "submit";
+          } else {
+            // Change it back to the original text
+            submitButton.innerText = "submitting....";
+          }
+        });
+
+        if (uploadInput.files.length > 0) {
+          submitButton.disabled = false;
+        } else {
+          submitButton.disabled = true;
+        }
+      }
+
+      function showSuccessMessage() {
+        // Display a success message using a popup, alert, or other method
+        alert("Payment screenshot submitted successfully!");
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="main-div">
+      <p><strong>Name:</strong> {{name}}</p>
+      <p><strong>Contact:</strong> {{number}}</p>
+      <p><strong>Branch:</strong> {{branch}}</p>
+      <p><strong>Year:</strong> {{year}}</p>
+      <p><strong>Email:</strong> {{email}}</p>
+      <p><strong>Team:</strong> {{team_size}}</p>
+      <p><strong>Event:</strong> {{event}}</p>
+      <p><strong>Amount:</strong> {{amount}}</p>
+
+      <!-- Your form and other content here -->
+      <form
+        action="/payment/"
+        method="post"
+        enctype="multipart/form-data"
+        class="payment-form"
+      >
+        <!-- {% csrf_token %} -->
+        <h1>Payment</h1>
+        <br />
+        <!-- <img src="{% static 'Static_images/event_payment_QR.jpeg' %}" alt="payment qr" id="QR"> -->
+        <img
+          src="../../static/Static_images/event_payment_QR.jpeg"
+          alt="payment qr"
+          id="QR"
+        />
+        <br /><br />
+
+        <input type="hidden" class="input-field" name="name" value="{{name}}" />
+        <input
+          type="hidden"
+          class="input-field"
+          name="contact"
+          value="{{number}}"
+        />
+        <input
+          type="hidden"
+          class="input-field"
+          name="email"
+          value="{{email}}"
+        />
+        <input
+          type="hidden"
+          class="input-field"
+          name="Branch"
+          value="{{branch}}"
+        />
+        <input type="hidden" class="input-field" name="Year" value="{{year}}" />
+        <input
+          type="hidden"
+          class="input-field"
+          name="event"
+          value="{{event}}"
+        />
+        <input
+          type="hidden"
+          class="input-field"
+          name="team_size"
+          value="{{team_size}}"
+        />
+        <input
+          type="hidden"
+          class="input-field"
+          name="team_member"
+          value="{{team_members}}"
+        />
+        <input
+          type="hidden"
+          class="input-field"
+          name="amount"
+          value="{{amount}}"
+        />
+
+        <label for="screenshot">Upload Payment Screenshot:</label><br /><br />
+        <h6 style="color: red">* Uploading the Screenshot is Mandatory</h6>
+        <br />
+        <input
+          type="file"
+          id="screenshot"
+          name="screenshot"
+          accept="image/*"
+          onchange="enableSubmit()"
+        /><br />
+        <br />
+        Enter the transaction-id: <br />
+        <input
+          type="text"
+          id="transaction-id"
+          name="transaction-id"
+          placeholder="Transaction-id"
+        /><br />
+        <br />
+        <button type="submit" id="submitBtn" disabled>Submit</button>
+      </form>
+      <div
+        class="alert alert-warning alert-dismissible fade show col-md-13"
+        role="alert"
+      >
+        <strong>Note!</strong> After clicked on submit please wait for a minute
+        , registration will be successful after the Home page occurs,
+        <strong>please check the email</strong>
+      </div>
+    </div>
+
+    <!--    <script>-->
+    <!--        document.querySelector('.payment-form').addEventListener('submit', function(event) {-->
+    <!--            event.preventDefault(); // Prevent the actual form submission for this example-->
+    <!--            showSuccessMessage(); // Display the success message-->
+    <!--            window.location.href = "";-->
+    <!--        });-->
+    <!--    </script>-->
+  </body>
+</html>

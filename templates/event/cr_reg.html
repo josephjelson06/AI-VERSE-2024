@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cr_reg.css' %}">
+    <title>CR registration</title>
+    <link rel="icon" type="images/x-icon" href="{% static 'Static_images\AIverse_logo.png' %}" />
+
+</head>
+<body>
+    <header class="navbar">
+        <div class="header">
+            <div id="logo">
+                <a href="index.html">
+                    <h1>AIverse.</h1>
+                </a>
+            </div>
+            <div class="menu">
+                <ul class='menu-links'>
+                    <li><a href="#" onclick="window.print()">PRINT</a></li>
+                </ul>
+            </div>
+            <div class="menu">
+                <ul class='menu-links'>
+                    <li><a href="/cr_back">BACK</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="event-heading">
+        <h2 style="text-decoration: underline;">AIVERSE</h2>
+        <h3 style="text-decoration: underline;">Registration For Cubic Realm</h3>
+    </div><br>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Year</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Team Size</th>
+            <th>Team Members</th>
+            <th>amount</th>
+            <th>ScreeShot</th>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Event</th>
+            <th>Signature</th>
+        </tr>
+        {% for i in data %} 
+        <tr>
+            <td>{{i.fields.Name}}</td>
+            <td>{{i.fields.Branch}}</td>
+            <td>{{i.fields.Year}}</td>
+            <td>{{i.fields.Email}}</td>
+            <td>{{i.fields.Contact}}</td>
+            <td>{{i.fields.Team_Size}}</td>
+            <td>{{i.fields.Team_member}}</td>
+            <td>{{i.fields.amount}}</td>
+            <td><img src='/media/{{i.fields.Screenshot}}' style="width: 200px;height:260px"></td>  <!--<td>{{i.fields.Screenshot}}</td> -->
+            <td>{{i.fields.Transaction_ID}}</td>
+            <td>{{i.fields.Date}}</td>
+            <td>{{i.fields.Event}}</td>
+            <td></td>
+        </tr> 
+        {% endfor %}
+    </table>
+</body>
+</html>
